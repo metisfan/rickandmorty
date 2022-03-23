@@ -73,11 +73,11 @@ const config: MenuEntry[] = [
       },
       {
         label: 'Docs',
-        href: '#',
+        href: 'https://gitbook.rickandmortydefi.finance/rickandmortydefi.finance/new-apr-boosting-feature',
       },
       {
         label: 'Presale',
-        href: '#',
+        href: 'https://dx.app/app/V3/defipresale?saleID=26&chain=Fantom',
       },
     ],
   },
