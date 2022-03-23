@@ -45,26 +45,26 @@ const config: MenuEntry[] = [
   //   icon: 'NftIcon',
   //   href: '/nft',
   // },
+ // {
+ //   label: 'Play 2 Earn & AirDrop',
+ //   icon: 'InfoIcon',
+  //  items: [
+  //    {
+  //      label: 'PreSale',
+  //      href: '',
+  //    },
+  //    {
+  //      label: 'Play 2 Earn coming soon',
+  //      href: '#',
+  //    },
+   //   {
+  //      label: 'AirDrop',
+   //     href: '#',
+  //    },
+ //   ],
+ // },
   {
-    label: 'Play 2 Earn & AirDrop',
-    icon: 'InfoIcon',
-    items: [
-      {
-        label: 'PreSale',
-        href: 'https://dx.app/app/v3/defipresale?saleID=23&chain=Fantom',
-      },
-      {
-        label: 'Play 2 Earn coming soon',
-        href: '#',
-      },
-      {
-        label: 'AirDrop',
-        href: '#',
-      },
-    ],
-  },
-  {
-    label: 'More & Charts',
+    label: 'Presale, Charts and Docs',
     icon: 'MoreIcon',
     items: [
       {
@@ -76,7 +76,7 @@ const config: MenuEntry[] = [
         href: '#',
       },
       {
-        label: 'Blog',
+        label: 'Presale',
         href: '#',
       },
     ],

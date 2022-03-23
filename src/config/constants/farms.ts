@@ -37,7 +37,7 @@ const farms: FarmConfig[] = [
   {
     pid: 2,
     risk: 1,
-    lpSymbol: 'WFTM-USDC',
+    lpSymbol: 'Low APR: WFTM-USDC',
     lpAddresses: {
       250: '0x2b4c76d0dc16be1c31d4c1dc53bf9b45987fc75c',
       97: '',
@@ -53,7 +53,7 @@ const farms: FarmConfig[] = [
   {
     pid: 3,
     risk: 3,
-    lpSymbol: 'WFTM-DAI',
+    lpSymbol: 'Low APR: WFTM-DAI',
     lpAddresses: {
       250: '0xe120ffBDA0d14f3Bb6d6053E90E63c572A66a428',
       97: '',
@@ -69,7 +69,7 @@ const farms: FarmConfig[] = [
   {
     pid: 4,
     risk: 2,
-    lpSymbol: 'BOO-WFTM',
+    lpSymbol: 'Medium APR: BOO-WFTM',
     lpAddresses: {
       250: '0xEc7178F4C41f346b2721907F5cF7628E388A7a58',
       97: '',
@@ -85,7 +85,7 @@ const farms: FarmConfig[] = [
   {
     pid: 5,
     risk: 4,
-    lpSymbol: 'WBTC-WFTM',
+    lpSymbol: 'Medium APR: WBTC-WFTM',
     lpAddresses: {
       250: '0xFdb9Ab8B9513Ad9E419Cf19530feE49d412C3Ee3',
       97: '',
@@ -119,7 +119,7 @@ const farms: FarmConfig[] = [
     pid: 7,
     risk: 3,
     isTokenOnly: true,
-    lpSymbol: 'USDC',
+    lpSymbol: 'High APR: USDC',
     lpAddresses: {
       250: '0x2b4c76d0dc16be1c31d4c1dc53bf9b45987fc75c',
       97: '', // FTM-USDC
@@ -136,7 +136,7 @@ const farms: FarmConfig[] = [
     pid: 8,
     risk: 2,
     isTokenOnly: true,
-    lpSymbol: 'WBTC',
+    lpSymbol: 'High APR: WBTC',
     lpAddresses: {
       250: '0xfdb9ab8b9513ad9e419cf19530fee49d412c3ee3',
       97: '', // FTM-WBTC LP
@@ -153,7 +153,7 @@ const farms: FarmConfig[] = [
     pid: 9,
     risk: 2,
     isTokenOnly: true,
-    lpSymbol: 'BOO',
+    lpSymbol: 'Ultra High APR: BOO',
     lpAddresses: {
       250: '0xEc7178F4C41f346b2721907F5cF7628E388A7a58',
       97: '', // FTM-WBTC LP
@@ -170,7 +170,7 @@ const farms: FarmConfig[] = [
     pid: 10,
     risk: 1,
     isTokenOnly: true,
-    lpSymbol: 'WFTM',
+    lpSymbol: 'Ultra High APR: WFTM',
     lpAddresses: {
       250: '0x5965e53aa80a0bcf1cd6dbdd72e6a9b2aa047410',
       97: '', // FTM-USDT
