@@ -73,7 +73,7 @@ const config: MenuEntry[] = [
       },
       {
         label: 'Docs',
-        href: 'https://gitbook.animeswapdefi.com/animeswapdefi.com/animeswapdefi-projects/waifuswapdefi',
+        href: '#',
       },
       {
         label: 'Blog',
