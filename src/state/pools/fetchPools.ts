@@ -39,8 +39,8 @@ export const fetchPoolsBlockLimits = async () => {
 }
 
 export const fetchPoolsTotalStatking = async () => {
-  const nonBnbPools = poolsConfig.filter((p) => p.stakingTokenName !== QuoteToken.BNB)
-  const bnbPool = poolsConfig.filter((p) => p.stakingTokenName === QuoteToken.BNB)
+  const nonBnbPools = poolsConfig.filter((p) => p.stakingTokenName !== QuoteToken.WFTM)
+  const bnbPool = poolsConfig.filter((p) => p.stakingTokenName === QuoteToken.WFTM)
 
   const callsNonBnbPools = nonBnbPools.map((poolConfig) => {
     return {
