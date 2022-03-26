@@ -8,19 +8,39 @@ import { getFullDisplayBalance } from 'utils/formatBalance'
 
 interface DepositModalProps {
   max: BigNumber
-  onConfirm: (amount: string) => void
+  onConfirm: (amount: string, decimal: number) => void
   onDismiss?: () => void
   tokenName?: string
   depositFeeBP?: number
+  decimal?: number
 }
 
-const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, tokenName = '' , depositFeeBP = 0}) => {
+const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, tokenName = '' , depositFeeBP = 0, decimal = 18}) => {
   const [val, setVal] = useState('')
   const [pendingTx, setPendingTx] = useState(false)
   const TranslateString = useI18n()
+
+  let maxHelper
+  let decimalHelper
+  let valHelper
+
+  if (tokenName === 'USDT' || tokenName === 'USDC') {
+    maxHelper = new BigNumber(max).div(10**6);
+    decimalHelper = 6;
+    valHelper = new BigNumber(val).times(10**(-12));
+  } else if (tokenName === 'WBTC') {
+    maxHelper = new BigNumber(max).div(10**8);
+    decimalHelper = 8;
+    valHelper = new BigNumber(val).times(10**(-10));
+  } else {
+    maxHelper = new BigNumber(max).times(10**(-18));
+    decimalHelper = decimal;
+    valHelper = new BigNumber(val);
+  }
+
   const fullBalance = useMemo(() => {
-    return getFullDisplayBalance(max)
-  }, [max])
+    return  (maxHelper)
+  }, [maxHelper])
 
   const handleChange = useCallback(
     (e: React.FormEvent<HTMLInputElement>) => {
@@ -29,7 +49,7 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, 
     [setVal],
   )
 
-  const handleSelectMax = useCallback(() => {
+    const handleSelectMax = useCallback(() => {
     setVal(fullBalance)
   }, [fullBalance, setVal])
 
@@ -51,7 +71,7 @@ const DepositModal: React.FC<DepositModalProps> = ({ max, onConfirm, onDismiss, 
           disabled={pendingTx}
           onClick={async () => {
             setPendingTx(true)
-            await onConfirm(val)
+            await onConfirm(valHelper, decimalHelper)
             setPendingTx(false)
             onDismiss()
           }}
