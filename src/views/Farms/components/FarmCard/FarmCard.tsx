@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react'
 import BigNumber from 'bignumber.js'
 import styled, { keyframes } from 'styled-components'
-import { Flex, Text, Skeleton, Heading } from '@pancakeswap-libs/uikit'
+import { Flex, Text, Skeleton } from '@pancakeswap-libs/uikit'
 import { communityFarms } from 'config/constants'
 import { Farm } from 'state/types'
 import { provider } from 'web3-core'
@@ -53,64 +53,19 @@ const StyledCardAccent = styled.div`
   left: -2px;
   z-index: -1;
 `
-const FlexWrapper = styled(Flex)`
-  margin-left: 40px;
-`
+
 const FCard = styled.div`
   align-self: baseline;
-  background-color: rgba(52, 60, 76, 0.4);
-  border-radius: 2px;
+  background: ${(props) => props.theme.card.background};
+  border-radius: 32px;
+  box-shadow: 0px 2px 12px -8px rgba(25, 19, 38, 0.1), 0px 1px 1px rgba(25, 19, 38, 0.05);
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding: 20px 24px;
+  padding: 24px;
   position: relative;
   text-align: center;
-  border: 1px solid #98bec3;
-  margin-bottom: 12px;
-  height: 100%;
 `
-const Wrapper = styled.div`
-  text-align: center;
-  display: grid;
-  grid-template-columns: 2fr 2.5fr 1fr ;
-  
-  ${({ theme }) => theme.mediaQueries.xs} {
-    & #include {
-      grid-column:  span 3;
-      margin-left: 0px;
-    }
-  }
-
-  ${({ theme }) => theme.mediaQueries.sm} {
-    & #include {
-      grid-column:  span 3;
-      margin-left: 0px;
-    }
-  }
-
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    & #include {
-      grid-column: span 1;
-    }
-  }
-`
-const InnerWrapper = styled.div`
-  text-align: center;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-
-  width: 100%;
-`
-const ExpandableWrapper = styled.div`
-  text-align: center;
-  display: grid;
-  grid-template-columns: 1fr 2fr;
-  width: 100%;
-`
-
-
 
 const Divider = styled.div`
   background-color: ${({ theme }) => theme.colors.borderColor};
@@ -118,53 +73,12 @@ const Divider = styled.div`
   margin: 28px auto;
   width: 100%;
 `
-const AlignRight = styled.div`
-  align-items: center;
-  width: 100%;
-  vertical-align: middle;
-`
 
 const ExpandingWrapper = styled.div<{ expanded: boolean }>`
-  overflow: auto;
-  display: grid;
-  grid-template-columns: 1.45fr 3.5fr;
-
-  ${({ theme }) => theme.mediaQueries.xs} {
-    & #include2 {
-      grid-column:  span 2;
-
-    }
-  }
-
-  ${({ theme }) => theme.mediaQueries.sm} {
-    & #include2 {
-      grid-column:  span 2;
-    }
-  }
-
-
-  ${({ theme }) => theme.mediaQueries.lg} {
-    & #include2 {
-      grid-column: span 1;
-    }
-  }
-`
-const ExpandingWrapper2 = styled.div`
+  height: ${(props) => (props.expanded ? '100%' : '0px')};
   overflow: hidden;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
 `
-const NewText = styled(Text)`
-  color: #FFFFFF;
-  font-size: 0.75rem;
-  align-items: center;
-`
-const NewHeading = styled(Heading)`
-  text-align: center;
-  color: #98bec3;
-  font-size: 1rem;
-  margin-bottom: 4px;
-`
+
 interface FarmCardProps {
   farm: FarmWithStakedValue
   removed: boolean
@@ -203,7 +117,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
     : '-'
 
   const lpLabel = farm.lpSymbol
-  const earnLabel = 'COAL'
+  const earnLabel = 'PORTAL'
   const farmAPY = farm.apy && farm.apy.times(new BigNumber(100)).toNumber().toLocaleString(undefined, {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -213,8 +127,7 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
 
   return (
     <FCard>
-      <Wrapper>
-        <div  id="include">
+      {farm.tokenSymbol === 'PORTAL' && <StyledCardAccent />}
       <CardHeading
         lpLabel={lpLabel}
         multiplier={farm.multiplier}
@@ -223,13 +136,10 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
         farmImage={farmImage}
         tokenSymbol={farm.tokenSymbol}
       />
-      </div>
-
-      <FlexWrapper id="include">
-      <InnerWrapper>
-      <Flex flexDirection="column">
-      <NewText  color="#FFFFFF"> {TranslateString(352, 'APR')}:</NewText>
-          <NewHeading  color="#98bec3" style={{ alignItems: 'center', marginTop: "-5px"}}>
+      {!removed && (
+        <Flex justifyContent='space-between' alignItems='center'>
+          <Text>{TranslateString(352, 'APR')}:</Text>
+          <Text bold style={{ display: 'flex', alignItems: 'center' }}>
             {farm.apy ? (
               <>
                 <ApyButton
@@ -245,38 +155,32 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
             ) : (
               <Skeleton height={24} width={80} />
             )}
-          </NewHeading>
+          </Text>
+        </Flex>
+      )}
+      <Flex justifyContent='space-between'>
+        <Text>{TranslateString(318, 'Earn')}:</Text>
+        <Text bold>{earnLabel}</Text>
       </Flex>
-
-      <Flex flexDirection="column" >
-      <NewText>Fees:</NewText>
-      <NewHeading  mb="4px" color="#98bec3">{(farm.depositFeeBP / 100)}%</NewHeading>
+      <Flex justifyContent='space-between'>
+        <Text style={{ fontSize: '24px' }}>{TranslateString(10001, 'Deposit Fee')}:</Text>
+        <Text bold style={{ fontSize: '24px' }}>{(farm.depositFeeBP / 100)}%</Text>
       </Flex>
-      
-      <Flex flexDirection="column" >
-      <NewText>TVL:</NewText>
-      <NewHeading  mb="4px" color="#98bec3">{totalValueFormated}</NewHeading>
-      </Flex>
-      </InnerWrapper>
-      </FlexWrapper>
-      <AlignRight id="include">
+      <CardActionsContainer farm={farm} ethereum={ethereum} account={account} />
+      <Divider />
       <ExpandableSectionButton
         onClick={() => setShowExpandableSection(!showExpandableSection)}
         expanded={showExpandableSection}
       />
-      </AlignRight>
-      </Wrapper>
-      
       <ExpandingWrapper expanded={showExpandableSection}>
-        <div id="include2">
         <DetailsSection
           removed={removed}
           isTokenOnly={farm.isTokenOnly}
           bscScanAddress={
             farm.isTokenOnly ?
-              `https://ftmscan.com/address/${farm.tokenAddresses[process.env.REACT_APP_CHAIN_ID]}`
+              `https://ftmscan.com/token/${farm.tokenAddresses[process.env.REACT_APP_CHAIN_ID]}`
               :
-              `https://ftmscan.com/address/${farm.lpAddresses[process.env.REACT_APP_CHAIN_ID]}`
+              `https://ftmscan.com/token/${farm.lpAddresses[process.env.REACT_APP_CHAIN_ID]}`
           }
           totalValueFormated={totalValueFormated}
           lpLabel={lpLabel}
@@ -284,10 +188,6 @@ const FarmCard: React.FC<FarmCardProps> = ({ farm, removed, cakePrice, bnbPrice,
           quoteTokenSymbol={quoteTokenSymbol}
           tokenAddresses={tokenAddresses}
         />
-        </div>
-        <div id="include2">
-        <CardActionsContainer farm={farm} ethereum={ethereum} account={account} />
-        </div>
       </ExpandingWrapper>
     </FCard>
   )
