@@ -7,7 +7,7 @@ const farms: FarmConfig[] = [
     risk: 5,
     lpSymbol: 'PORTAL-fUSDT',
     lpAddresses: {
-      250: '',
+      250: '0x350AD9B0c829B6e929592533eC0f0094C3B9A39F',
       97: '',
     },
     tokenSymbol: 'PORTAL',
@@ -23,7 +23,7 @@ const farms: FarmConfig[] = [
     risk: 5,
     lpSymbol: 'PORTAL-WFTM',
     lpAddresses: {
-      250: '',
+      250: '0xaDF575aC0958073b0404AE24b327526dF155E3CF',
       97: '',
     },
     tokenSymbol: 'PORTAL',
@@ -88,12 +88,12 @@ const farms: FarmConfig[] = [
     isTokenOnly: true,
     lpSymbol: 'PORTAL',
     lpAddresses: {
-      250: '0xC4045e90f65dD0405aC6CeAb18Eb37C29A1Bb990',
+      250: '0x350AD9B0c829B6e929592533eC0f0094C3B9A39F',
       97: '', // PORTAL-USDT LP
     },
     tokenSymbol: 'PORTAL',
     tokenAddresses: {
-      250: '0xa99a2A440494299476f4ceB1696433c66c0d7358',
+      250: '0xde88421D1a62A232e73921b22A68394e8Eb672Da',
       97: '',
     },
     quoteTokenSymbol: QuoteToken.USDT,
