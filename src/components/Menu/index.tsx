@@ -25,7 +25,7 @@ const Menu = (props) => {
       setLang={setSelectedLanguage}
       cakePriceUsd={cakePriceUsd.toNumber()}
       links={config}
-      priceLink="https://www.coingecko.com/en/coins/goose-finance"
+      priceLink="https://dexscreener.com/fantom/0xadf575ac0958073b0404ae24b327526df155e3cf"
       {...props}
     />
   )
